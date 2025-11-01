@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hallo Property</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header {
+      background-color: #333;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .header img {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+      border-radius: 5px;
+    }
+
+    .header span {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 50px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .logo {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #333;
+      font-size: 24px;
+    }
+
+    .link {
+      display: block;
+      margin: 15px 0;
+      padding: 15px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .link:hover {
+      background-color: #0056b3;
+    }
+
+    .login-button {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 10px 15px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      z-index: 1001;
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      z-index: 1002;
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    .popup input {
+      display: block;
+      margin: 10px auto;
+      padding: 10px;
+      width: 80%;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .popup button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+    }
+
+    #admin-panel {
+      margin-top: 30px;
+      text-align: left;
+    }
+
+    #admin-panel input {
+      display: block;
+      margin: 10px 0;
+      padding: 10px;
+      width: 100%;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    #admin-panel button {
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    @media screen and (max-width: 600px) {
+      h1 {
+        font-size: 20px;
+      }
+
+      .link {
+        font-size: 14px;
+        padding: 12px;
+      }
+
+      .login-button {
+        font-size: 12px;
+        padding: 8px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Tombol Login Admin -->
+  <button class="login-button" onclick="showLogin()">Login Admin</button>
+
+  <!-- Overlay dan Popup Login -->
+  <div class="overlay" id="overlay" onclick="hideLogin()"></div>
+
+  <div class="popup" id="loginPopup">
+    <h2>Login Admin</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+  </div>
+
+  <!-- Header -->
+  <div class="header">
+    <img src="Hallo Propety.png" alt="Logo Hallo Property">
+    <span>Hallo Property</span>
+  </div>
+
+  <!-- Konten Utama -->
+  <div class="container">
+    <img src="Hallo Propety.png" alt="Logo Hallo Property" class="logo">
+    <h1>Hallo Property</h1>
+    <a class="link" href="https://instagram.com/nama_perusahaan" target="_blank">Instagram</a>
+    <a class="link" href="https://www.facebook.com/people/Hallo-Property/100095093343486" target="_blank">Facebook</a>
+    <a class="link" href="https://wa.me/6285216315716" target="_blank">WhatsApp</a>
+    <a class="link" href="https://www.tiktok.com/@halloproperty_cengkareng" target="_blank">TikTok</a>
+
+    <!-- Panel Admin -->
+    <div id="admin-panel" style="display:none;">
+      <h3>Ubah Warna Tombol</h3>
+      <input type="text" id="newColor" placeholder="Contoh: #ff6600">
+      <button onclick="ubahWarna()">Terapkan</button>
+
+      <h3 style="margin-top:30px;">Tambah Link Baru</h3>
+      <input type="text" id="linkName" placeholder="Nama Link (contoh: YouTube Hallo Property)">
+      <input type="text" id="linkURL" placeholder="URL (contoh: https://youtube.com/halloproperty)">
+      <button onclick="tambahLink()">Tambah Link</button>
+    </div>
+  </div>
+
+  <!-- Script Login & Admin -->
+  <script>
+    function showLogin() {
+      document.getElementById("loginPopup").style.display = "block";
+      document.getElementById("overlay").style.display = "block";
+    }
+
+    function hideLogin() {
+      document.getElementById("loginPopup").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+    }
+
+    function login() {
+      const user = document.getElementById("username").value;
+      const pass = document.getElementById("password").value;
+
+      if (user === "admin" && pass === "halloproperty") {
+        alert("Login berhasil!");
+        hideLogin();
+        document.getElementById("admin-panel").style.display = "block";
+      } else {
+        alert("Username atau password salah!");
+      }
+    }
+
+    function ubahWarna() {
+      const warna = document.getElementById("newColor").value;
+      const tombol = document.querySelectorAll(".link");
+      tombol.forEach(btn => {
+        btn.style.backgroundColor = warna;
+      });
+    }
+
+    function tambahLink() {
+      const name = document.getElementById("linkName").value;
+      const url = document.getElementById("linkURL").value;
+
+      if (name && url) {
+        const newLink = document.createElement("a");
+        newLink.className = "link";
+        newLink.href = url;
+        newLink.target = "_blank";
+        newLink.textContent = name;
+
+        document.querySelector(".container").appendChild(newLink);
+
+        document.getElementById("linkName").value = "";
+        document.getElementById("linkURL").value = "";
+      } else {
+        alert("Isi nama dan URL terlebih dahulu.");
+      }
+    }
+  </script>
+
+</body>
+</html>
